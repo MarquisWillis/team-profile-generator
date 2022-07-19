@@ -11,7 +11,7 @@ describe("Engineer class", () => {
         expect(engineer.getEmail()).toBe("johnDoe@yahoo.com");
 
         // testing override methods and properties of subclass Engineer that extend from superclass Employee
-        expect(engineer.getRole()).toBe("Engineer");
+        expect(engineer.getRole()).toBe("🕶️ Engineer");
         expect(engineer.getGithub()).toBe("johnDoee");
     })
 })

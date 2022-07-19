@@ -12,7 +12,7 @@ describe("Intern class", () => {
         expect(intern.getEmail()).toBe("johnDoe@yahoo.com");
 
         // testing subclass properties and methods
-        expect(intern.getRole()).toBe("Intern");
+        expect(intern.getRole()).toBe("🎓 Intern");
         expect(intern.getSchool()).toBe("OSU");
     })
 })

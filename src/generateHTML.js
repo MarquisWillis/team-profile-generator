@@ -10,21 +10,20 @@ function generateHTML(cards) {
         <title>Document</title>
     </head>
     <body>
-        <div class="h-100 text-center text-white p-3 bg-danger  ">
-            <h2>Team</h2>
-             
-          </div>
+        <div class="h-100 text-center text-white p-3 bg-danger">
+            <h2>Team</h2>     
+        </div>
         
-          <div class="container">
+        <div class="container">
             <div class="row d-flex justify-content-center">
             
-                     ${cards}
+                ${cards}
   
             </div>
             </div>
-      </body>
-      </html>
-            `
+    </body>
+    </html>
+    `
 }
 
 module.exports = generateHTML;

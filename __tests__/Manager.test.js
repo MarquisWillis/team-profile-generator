@@ -11,7 +11,7 @@ describe("Manager class", () => {
         expect(manager.getEmail()).toBe("johnDoe@yahoo.com");
 
         //testing subclass properties and methods
-        expect(manager.getRole()).toBe("Manager");
+        expect(manager.getRole()).toBe("☕ Manager");
         expect(manager.getOfficeNumber()).toBe("12345");
     })
 })

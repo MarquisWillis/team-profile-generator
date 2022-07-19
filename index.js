@@ -49,7 +49,7 @@ const internQuestions = [
     { type: "input", message: "What is the school?", name: "internSchool" }
 ];
 
-// 3.) link src helper files to generate team profile
+// 3.) link src helper files to generate team profile while creating index.js functions to incorperate the files together
 
 function init() {
     inquirer
@@ -99,7 +99,7 @@ function addEmployee() {
                         (response.engineerName,
                             response.engineerId,
                             response.engineerEmail,
-                            response.engineerNumber);
+                            response.engineerGithub);
     
                     employeeArray.push(engineer);
                     confirmNext();
@@ -113,7 +113,7 @@ function addEmployee() {
                         (response.internName,
                             response.internId,
                             response.internEmail,
-                            response.internNumber);
+                            response.internSchool);
     
                     employeeArray.push(intern);
                     confirmNext();
@@ -128,17 +128,18 @@ function createHTML() {
     let cards = ""
 
     for (let i = 0; i < employeeArray.length; i++) {
-        if (employeeArray[i].getRole() === "Manager") {
-            cards = cards + generateManager(employeeArray[i]);
+        if (employeeArray[i].getRole() === "☕ Manager") {
+            cards = cards + generateManager(employeeArray[i])
         }
-        else if (employeeArray[i].getRole() === "Engineer") {
+        else if (employeeArray[i].getRole() === "🕶️ Engineer") {
             //same as manager card but for Enineer card
-            cards = cards + generateEngineer(employeeArray[i]);
+            cards = cards + generateEngineer(employeeArray[i])
         } else {
             //same as manager card but for  intern card
-            cards = cards + generateIntern(employeeArray[i]);
+            cards = cards + generateIntern(employeeArray[i])
         }
-    }
+    } 
+
     fs.writeFileSync("./dist/team.html", generateHTML(cards));
 }
 
