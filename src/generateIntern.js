@@ -1,3 +1,5 @@
+// card generator file for intern role card
+
 function generateIntern(intern) {
     return `  <div class="col-sm-4 my-3">
     <div class="card d-flex text-center">

@@ -1,3 +1,4 @@
+// card generator file for manager role card
 function generateManager(manager) {
     return `  <div class="col-sm-4 my-3">
     <div class="card d-flex text-center">

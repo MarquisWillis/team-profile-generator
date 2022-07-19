@@ -1,3 +1,5 @@
+// final HTML generator function (accepts elements created from other HTML generators to insert into below file in dist folder).
+
 function generateHTML(cards) {
     return `<!DOCTYPE html>
     <html lang="en">

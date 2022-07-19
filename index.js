@@ -26,8 +26,11 @@ const fs = require('fs');
         - if yes, loop thru instructions above all over again and add as many team members as you want
         - otherwise, generate html and css output in the dist folder
 */
+
+// empty employee array to be dynamically added to
 const employeeArray = [];
 
+// array of questions for manager inquirer prompts
 const managerQuestions = [
     { type: "input", message: "What is the name?", name: "managerName" },
     { type: "input", message: "What is the id?", name: "managerId" },
@@ -35,6 +38,7 @@ const managerQuestions = [
     { type: "input", message: "What is the office number?", name: "managerNumber" }
 ];
 
+// array of questions for engineer inquirer prompts
 const engineerQuestions = [
     { type: "input", message: "What is the name?", name: "engineerName" },
     { type: "input", message: "What is the id?", name: "engineerId" },
@@ -42,6 +46,7 @@ const engineerQuestions = [
     { type: "input", message: "What is the github?", name: "engineerGithub" }
 ];
 
+// array of questions for intern inquirer prompts
 const internQuestions = [
     { type: "input", message: "What is the name?", name: "internName" },
     { type: "input", message: "What is the id?", name: "internId" },
@@ -49,9 +54,10 @@ const internQuestions = [
     { type: "input", message: "What is the school?", name: "internSchool" }
 ];
 
-// 3.) link src helper files to generate team profile while creating index.js functions to incorperate the files together
 
+// function to initialize program when started via command line
 function init() {
+    // always initializes manager first
     inquirer
         .prompt(managerQuestions)
         .then(response => {
@@ -66,6 +72,7 @@ function init() {
         })
 };
 
+// function to confirm or deny expanding team for HTML page output
 function confirmNext() {
     inquirer
         .prompt([{
@@ -82,8 +89,10 @@ function confirmNext() {
         })
 };
 
+// function that is performed after addMore is verified true in confirmNext()
 function addEmployee() {
     inquirer
+        // singles out to add an intern or engineer
         .prompt([{
             type: 'list',
             message: 'Do you wish to add an engineer or an intern?',
@@ -91,37 +100,40 @@ function addEmployee() {
             name: 'addType'
         }])
         .then((response) => {
+            // if Engineer, create a new Engineer and push them onto the employeeArray
             if (response.addType === 'Engineer') {
                 inquirer
                     .prompt(engineerQuestions)
                     .then(response => {
                         const engineer = new Engineer
-                        (response.engineerName,
-                            response.engineerId,
-                            response.engineerEmail,
-                            response.engineerGithub);
-    
-                    employeeArray.push(engineer);
-                    confirmNext();
-                })
-                
-            } else if (response.addType === 'Intern'){
+                            (response.engineerName,
+                                response.engineerId,
+                                response.engineerEmail,
+                                response.engineerGithub);
+
+                        employeeArray.push(engineer);
+                        confirmNext(); // redeclare confirmNext() to make sure the user wants to continue
+                    })
+            
+            // if Intern, create a new Intern and push them onto the employeeArray
+            } else if (response.addType === 'Intern') {
                 inquirer
                     .prompt(internQuestions)
                     .then(response => {
                         const intern = new Intern
-                        (response.internName,
-                            response.internId,
-                            response.internEmail,
-                            response.internSchool);
-    
-                    employeeArray.push(intern);
-                    confirmNext();
-                })
-        }
-    })
+                            (response.internName,
+                                response.internId,
+                                response.internEmail,
+                                response.internSchool);
+
+                        employeeArray.push(intern);
+                        confirmNext(); // redeclare confirmNext() to make sure the user wants to continue
+                    })
+            }
+        })
 }
 
+// function to be called when the user has confirmed all team member submissions to initiate HTML generation process
 function createHTML() {
     console.log(employeeArray)
 
@@ -138,9 +150,10 @@ function createHTML() {
             //same as manager card but for  intern card
             cards = cards + generateIntern(employeeArray[i])
         }
-    } 
+    }
 
     fs.writeFileSync("./dist/team.html", generateHTML(cards));
 }
 
+// function call to init to initialize the application
 init();
